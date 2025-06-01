@@ -1,0 +1,27 @@
+public class FinchTapeDetection {
+    public static void main(String[] args) {
+        Finch myFinch = new Finch();
+
+        // Set the threshold based on expected tape reflectivity
+        int tapeThreshold = 50; // Adjust based on your lighting and tape reflectivity
+
+        while (true) {
+            int leftLight = myFinch.getLeftLightSensor();
+            int rightLight = myFinch.getRightLightSensor();
+
+            System.out.println("Left Light: " + leftLight + ", Right Light: " + rightLight);
+
+            // If either light sensor detects the tape, stop the Finch
+            if (leftLight >= tapeThreshold || rightLight >= tapeThreshold) {
+                myFinch.stop();
+                System.out.println("Tape detected! Finch stopped.");
+                break;
+            }
+
+            // Keep moving forward
+            myFinch.setWheelVelocities(100, 100);
+        }
+
+        myFinch.quit();
+    }
+}

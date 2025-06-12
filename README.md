@@ -13,7 +13,9 @@
 <details>
 <summary><strong>Inspiration for the Project</strong></summary>
 
-I wanted to recreate the cornhole game what it could be played with little bals of paper 
+I wanted to recreate the cornhole game what it could be played with little bals of paper.
+Not only this is a game but if you have a created mind this robot could do different thinks such as 
+a phone holder, and also a card holder it just depents on your imagination.
 </details>
 
 ---
@@ -24,7 +26,6 @@ I wanted to recreate the cornhole game what it could be played with little bals 
 ###### Include commentary on your experience with the design cycle during this project
 
 ---
-
 ### Code to Highlight
 ```java
 public static void followLine(Finch f) {

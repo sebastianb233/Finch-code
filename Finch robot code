@@ -1,27 +1,72 @@
-public class FinchTapeDetection {
-    public static void main(String[] args) {
-        Finch myFinch = new Finch();
+public class FinchTest1 {
+    private Finch finch;
 
-        // Set the threshold based on expected tape reflectivity
-        int tapeThreshold = 50; // Adjust based on your lighting and tape reflectivity
+    public FinchTest1() {
+        finch = new Finch(); // Initiate Finch robot
+    }
 
-        while (true) {
-            int leftLight = myFinch.getLeftLightSensor();
-            int rightLight = myFinch.getRightLightSensor();
+    public void FinchButtonScore() {
+        int s = 0; // Score variable
 
-            System.out.println("Left Light: " + leftLight + ", Right Light: " + rightLight);
+        while (true) { // Keeps program running
+            if (finch.getButton("A") || finch.getButton("B")) { 
+                s++;  // Increment score
+                System.out.println("Score: " + s); 
 
-            // If either light sensor detects the tape, stop the Finch
-            if (leftLight >= tapeThreshold || rightLight >= tapeThreshold) {
-                myFinch.stop();
-                System.out.println("Tape detected! Finch stopped.");
-                break;
+                while (finch.getButton("A") || finch.getButton("B")) { 
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
+        }
+    }
 
-            // Keep moving forward
-            myFinch.setWheelVelocities(100, 100);
+    public boolean detectTape() {
+        int tapeThreshold = 50; // Tape reflectivity threshold
+        int leftLight = finch.getLight("L");
+        int rightLight = finch.getLight("R");
+
+        System.out.println("Left Light: " + leftLight + ", Right Light: " + rightLight);
+        return leftLight >= tapeThreshold || rightLight >= tapeThreshold;
+        
+    }
+    
+
+    public void times(int time) {
+        // Ensure valid time range
+        time = Math.min(135, Math.max(32, time));
+
+        for (int i = 0; i < time; i++) {
+            for (int j = 0; j < 5; j++) {
+                numbers(j);
+                finch.pause(time);
+            }
+        }
+    }
+
+    public void numbers(int num) {
+        int[] display = new int[25];
+
+        switch (num) {
+            case 1: display = new int[]{0,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,1,0,0,1,1,1,1,1}; break;
+            case 2: display = new int[]{0,1,1,1,0,1,0,0,1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1,1}; break;
+            case 3: display = new int[]{0,1,1,1,0,1,0,0,0,1,0,0,1,1,0,1,0,0,0,1,0,1,1,1,0}; break;
+            case 4: display = new int[]{1,0,1,0,0,1,0,1,0,0,1,1,1,1,1,0,0,1,0,0,0,0,1,0,0}; break;
         }
 
-        myFinch.quit();
+        for (int i = 0; i < display.length; i++) {
+            display[i] = display[i] == 0 ? 32 : 135;
+        }
+
+        finch.setDisplay(display);
     }
+
+    public static void main(String[] args) {
+        FinchTest1 test = new FinchTest1();
+        test.FinchButtonScore();
+    }
+    
 }

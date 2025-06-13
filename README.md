@@ -1,12 +1,12 @@
-# finch-robot
+# Finch-robot
 
 ### Development Checklist
 
 | Completed | Task         | Description |
 |:---------:| :-----------:|:------------|
 |    ✅     | Familiarize  | Learn how to: <ul><li>Connect to the robot</li><li>Interpret what built-in sensors detect</li><li>Program basics in SNAP!</li><li>Setup local developing environment to code in Java</li></ul>|
-|    ✅     | 3D Design    |             |
-|    ❌     | Develop Code |             |
+|    ✅     | 3D Design    |  <ul><li>Get familiar with the thinkercat software</li><li>Thing what shape fit the best interest</li><li>Create our first model</li><li>Create The final model with some adjustments from the first model        |
+|    ✅     | Develop Code |   <ul><li>Research how does the birdbrain library works</li><li>Create a skeach of what the robot would do</li><li>Research the platform where we are going to be coding</li><li>Create the first version of the code</li><li>Finalize with a V2 of the code what fixes all bugs or mistakes from version 1          |
 
 ---
 
@@ -28,27 +28,25 @@ a phone holder, and also a card holder it just depents on your imagination.
 ---
 ### Code to Highlight
 ```java
-public static void followLine(Finch f) {
-	int left = f.getLine("L");
-	int right = f.getLine("R");
-	
-	System.out.println("left: " + left + " right: " + right);
-	if (left < 90) {
-		f.setMotors(0, 10);
-	} else if (right > 90) {
-		f.setMotors(10, 0);
-	} else {
-		f.setMotors(10, 10);
-	}
-	f.pause(.1);
+public boolean detectTape() {
+        int tapeThreshold = 50; // Tape reflectivity threshold
+        int leftLight = finch.getLight("L");
+        int rightLight = finch.getLight("R");
+
+        System.out.println("Left Light: " + leftLight + ", Right Light: " + rightLight);
+        return leftLight >= tapeThreshold || rightLight >= tapeThreshold;
+        
+    }
 }
 ```
 
 ---
 
-### Choose At Least Three of the Following to Include:
-- What was your motivation?
-- Why did you build this project? (Note: the answer is not "Because it was a homework assignment.")
-- What problem does it solve?
-- What did you learn?
-- What makes your project stand out?
+### Motivation:
+- In my experience my motivation was honostly using the 3D printer, becuase its my first time completing a project with them. This motivation give me more self confidence to create a better model that fit our interest and at the same time was ideal for the goal of the project.
+### Why did we build this project:
+- We build this project becuase it was the first thing that came to our minds , and it was something that anyother group did not thought about.
+### What did we learn:
+- In this project i learn that you are not always told what to do, or how to do things in a professional environment, This prohect teach to not depend on others and focus more on my self for my own benefit.
+### What makes the project stand out:
+- I things that it stands out because none of the other groups did something like ours and also i thing is the only one with intentionally multipurpose.
